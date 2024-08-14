@@ -1,6 +1,6 @@
-import java.util.*;
-import java.util.stream.Collectors;
-import java.time.LocalDate;
+import java.util.*; //util package includes List, ArrayList, Hashmap, Hashset, etc.
+import java.util.stream.Collectors; //imports the Collectors class from the .util.stream package, necessary when using both general utility classes as well as specific stream-related
+import java.time.LocalDate; //imports LocalDate class
 
 public class Library {
     private List<Book> books = new ArrayList<>();
@@ -13,14 +13,14 @@ public class Library {
 
     // Remove a book by title
     public void removeBook(String title) {
-        books.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
+        books.removeIf(book -> book.getTitle().equalsIgnoreCase(title)); //lambda in this context is a predicate that defines a condition for removing books
     }
 
     // Find all books published in a specific year
     public List<Book> findBooksByYear(int year) {
         return books.stream()
-                .filter(book -> book.getPublicationYear() == year)
-                .collect(Collectors.toList());
+                .filter(book -> book.getPublicationYear() == year) //filter is a method of stream, filters out books with matching publication year
+                .collect(Collectors.toList()); //collector to turn stream data back into list
     }
 
     // Find all books by a specific author
@@ -31,9 +31,11 @@ public class Library {
     }
 
     // Find the book with the most pages
-    public Optional<Book> findBookWithMostPages() {
+    public Optional<Book> findBookWithMostPages() { //Optional is a container object which may or may not contain a non-null value; used to avoid null and handle the absence of value in a more graceful way
         return books.stream()
-                .max(Comparator.comparingInt(Book::getPages));
+                .max(Comparator.comparingInt(Book::getPages)); //max is a terminal operation (final step, triggers processing of stream and returns result)
+        //returns maximum element of stream based on specified comparator
+        //returns optional describing the max of the stream or empty optional if stream is empty
     }
 
     // Find all books with more than n pages
@@ -60,8 +62,8 @@ public class Library {
 
     // Loan out a book
     public boolean loanBook(String title, User user) {
-        for (Book book : books) {
-            if (book.getTitle().equalsIgnoreCase(title) && !book.isOnLoan()) {
+        for (Book book : books) { //for each Book object in the collection 'books':
+            if (book.getTitle().equalsIgnoreCase(title) && !book.isOnLoan()) { //checks that book isnt already on loan
                 book.setOnLoan(true);
                 book.setLoanDate(LocalDate.now());
                 user.loanBook(book);
