@@ -1,4 +1,4 @@
-import java.time.LocalDate;
+import java.time.LocalDate; //class for working with dates and times
 
 public class Book {
     private String title;
@@ -27,6 +27,6 @@ public class Book {
     public boolean isOnLoan() { return isOnLoan; }
     public void setOnLoan(boolean onLoan) { isOnLoan = onLoan; }
     public LocalDate getLoanDate() { return loanDate; }
-    public void setLoanDate(LocalDate loanDate) { this.loanDate = loanDate; }
+    public void setLoanDate(LocalDate loanDate) { this.loanDate = loanDate; } //using LocalDate in type field
 }
 
